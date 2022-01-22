@@ -1,7 +1,4 @@
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-
-namespace BRW.Domain.Entities;
+namespace Project.Domain.Entities;
 
 public class User : Basis
 {

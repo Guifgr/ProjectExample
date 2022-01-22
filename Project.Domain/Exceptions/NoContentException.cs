@@ -1,4 +1,4 @@
-﻿namespace BRW.Domain.Exceptions;
+﻿namespace Project.Domain.Exceptions;
 
 public class NoContentException : Exception
 {

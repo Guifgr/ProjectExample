@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using BRW.Domain.Entities;
 using Project.Application.DTOs;
+using Project.Domain.Entities;
 
 namespace Project.Application.Profiles
 {

@@ -1,16 +1,16 @@
-using BRW.Domain.Entities;
-using BRW.Domain.Exceptions;
-using BRW.Domain.IRepository;
 using Microsoft.EntityFrameworkCore;
+using Project.Domain.Entities;
+using Project.Domain.Exceptions;
+using Project.Domain.IRepository;
 using Project.Infrastructure.Context;
 
 namespace Project.Infrastructure.Repository;
 
 public class UserRepository : IUserRepository
 {
-    private readonly BrwAppContext _context;
+    private readonly DataContext _context;
 
-    public UserRepository(BrwAppContext context)
+    public UserRepository(DataContext context)
     {
         _context = context;
     }

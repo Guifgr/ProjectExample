@@ -1,7 +1,4 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace BRW.Domain.Entities;
+namespace Project.Domain.Entities;
 
 public abstract class Basis
 { 

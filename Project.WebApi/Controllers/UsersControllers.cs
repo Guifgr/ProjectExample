@@ -1,10 +1,8 @@
+using Microsoft.AspNetCore.Mvc;
 using Project.Application.DTOs;
 using Project.Application.IBusiness;
-using BRW.Domain.Entities;
-using BRW.Domain.IRepository;
-using Microsoft.AspNetCore.Mvc;
 
-namespace BRW.API.Controllers;
+namespace Project.WebApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]

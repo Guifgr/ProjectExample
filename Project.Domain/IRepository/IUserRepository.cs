@@ -1,6 +1,6 @@
-using BRW.Domain.Entities;
+using Project.Domain.Entities;
 
-namespace BRW.Domain.IRepository;
+namespace Project.Domain.IRepository;
 
 public interface IUserRepository
 {

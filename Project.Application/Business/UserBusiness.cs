@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using BRW.Domain.Entities;
-using BRW.Domain.Exceptions;
-using BRW.Domain.IRepository;
 using Project.Application.DTOs;
 using Project.Application.IBusiness;
+using Project.Domain.Entities;
+using Project.Domain.Exceptions;
+using Project.Domain.IRepository;
 
 namespace Project.Application.Business;
 

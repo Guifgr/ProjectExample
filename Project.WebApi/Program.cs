@@ -1,10 +1,10 @@
 using Project.Application.Business;
 using Project.Application.IBusiness;
 using Project.Application.Middleware;
-using BRW.Domain.IRepository;
 using Project.Infrastructure.Context;
 using Project.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
+using Project.Domain.IRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 var connectionString = builder.Configuration.GetConnectionString("postgresConnectionString");
-builder.Services.AddDbContext<BrwAppContext>(options => options.UseNpgsql(connectionString).UseSnakeCaseNamingConvention());
+builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(connectionString).UseSnakeCaseNamingConvention());
 
 builder.Services.AddScoped<IUserBusiness, UserBusiness>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();

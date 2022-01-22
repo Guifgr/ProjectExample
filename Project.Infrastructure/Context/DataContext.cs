@@ -1,18 +1,18 @@
-using BRW.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Project.Domain.Entities;
 using Group = System.Text.RegularExpressions.Group;
 
 namespace Project.Infrastructure.Context;
 
-public class BrwAppContext: DbContext
+public class DataContext: DbContext
 {
-    public BrwAppContext(DbContextOptions options) : base(options)
+    public DataContext(DbContextOptions options) : base(options)
     {
     }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(BrwAppContext).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(DataContext).Assembly);
         modelBuilder.Entity<User>(entity =>
         {
             entity.Property(e => e.Guid).HasDefaultValueSql("uuid()");
