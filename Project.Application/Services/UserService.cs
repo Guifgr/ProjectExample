@@ -1,18 +1,18 @@
 ﻿using AutoMapper;
 using Project.Application.DTOs;
-using Project.Application.IBusiness;
+using Project.Application.IServices;
 using Project.Domain.Entities;
 using Project.Domain.Exceptions;
 using Project.Domain.IRepository;
 
-namespace Project.Application.Business;
+namespace Project.Application.Services;
 
-public class UserBusiness : IUserBusiness
+public class UserService : IUserServices
 {
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
 
-    public UserBusiness(IUserRepository userRepository, IMapper mapper)
+    public UserService(IUserRepository userRepository, IMapper mapper)
     {
         _userRepository = userRepository;
         _mapper = mapper;
@@ -62,5 +62,10 @@ public class UserBusiness : IUserBusiness
         var user = _mapper.Map<User>(userDto);
         var userGetDto = await _userRepository.CreateUser(user);
         return _mapper.Map<UserGetDto>(userGetDto);
+    }
+
+    public Task DeleteUser(Guid guid)
+    {
+        _userRepository.
     }
 }

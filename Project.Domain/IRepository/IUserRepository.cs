@@ -10,4 +10,6 @@ public interface IUserRepository
     public Task<bool> UserEmailExists(string email);
 
     public Task<User> CreateUser(User user);
+
+    public Task DeleteUser(Guid guid);
 }

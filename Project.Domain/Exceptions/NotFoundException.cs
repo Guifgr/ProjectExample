@@ -1,8 +1,8 @@
 ﻿namespace Project.Domain.Exceptions;
 
-public class NoContentException : Exception
+public class NotFoundException : Exception
 {
-    public NoContentException(string message) : base(message)
+    public NotFoundException(string message) : base(message)
     {
     }
 }

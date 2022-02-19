@@ -1,9 +1,9 @@
-using Project.Application.Business;
-using Project.Application.IBusiness;
 using Project.Application.Middleware;
 using Project.Infrastructure.Context;
 using Project.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
+using Project.Application.IServices;
+using Project.Application.Services;
 using Project.Domain.IRepository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +15,7 @@ builder.Services.AddControllers();
 var connectionString = builder.Configuration.GetConnectionString("postgresConnectionString");
 builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(connectionString).UseSnakeCaseNamingConvention());
 
-builder.Services.AddScoped<IUserBusiness, UserBusiness>();
+builder.Services.AddScoped<IUserServices, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
