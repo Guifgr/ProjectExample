@@ -22,7 +22,7 @@ public class UserRepository : IUserRepository
         {
             return await _context.Users.ToListAsync();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw new ServerException("Erro ao acessar o banco");
         }
@@ -34,7 +34,7 @@ public class UserRepository : IUserRepository
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Guid == guid);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw new ServerException("Erro ao acessar o banco");
         }
@@ -51,7 +51,7 @@ public class UserRepository : IUserRepository
             throw new ServerException("Erro ao acessar o banco");
         }
     }
-    
+
 
     public async Task<User> CreateUser(User user)
     {
@@ -65,5 +65,12 @@ public class UserRepository : IUserRepository
         {
             throw new ServerException("Erro no servidor ao tentar cadastrar");
         }
+    }
+
+    public async Task DeleteUser(Guid guid)
+    {
+        var user = await GetUserByGuid(guid);
+        if (user == null) throw new NotFoundException("Usuário não encontrado");
+        _context.Users.Remove(user);
     }
 }

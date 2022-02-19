@@ -4,7 +4,7 @@ using Project.Application.IBusiness;
 
 namespace Project.WebApi.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class UsersControllers : ControllerBase
 {
@@ -15,19 +15,19 @@ public class UsersControllers : ControllerBase
         _userBusiness = userBusiness;
     }
 
-    [HttpGet("[action]")]
+    [HttpGet]
     public async Task<ActionResult<UserGetDto>> GetUsers()
     {
         return Ok(await _userBusiness.GetAllUsers());
     }
 
-    [HttpGet("[action]/{id:int}", Name = "GetUserById")]
+    [HttpGet("{guid:guid}", Name = "GetUserByGuid")]
     public async Task<ActionResult<UserGetDto>> GetUserByGuid(Guid guid)
     {
         return await _userBusiness.GetUserByGuid(guid);
     }
 
-    [HttpPost("[action]")]
+    [HttpPost]
     public async Task<ActionResult<UserGetDto>> CreateUser(UserCreateDto userDto)
     {
         var userGetDto = await _userBusiness.CreateUser(userDto);

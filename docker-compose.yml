@@ -1,26 +1,6 @@
 version: '3'
 
 services:
-  Project-webapi:
-    container_name: Project-webapi
-    image: Project-webapi
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    ports:
-      - "5000:80"
-      - "5001:443"
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+;http://+
-      - ASPNETCORE_HTTPS_PORT=5001
-      - ASPNETCORE_Kestrel__Certificates__Default__Password=1e4794496a58be1f176346173efae5421420aef3
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
-    volumes:
-      - /home/${USER}/.aspnet/https:/https/ 
-    depends_on:
-      - postgres-Project-compose
-  
   postgres-Project-compose:
     container_name: Project-database
     image: postgres
