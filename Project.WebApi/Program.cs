@@ -18,8 +18,6 @@ builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(connecti
 builder.Services.AddScoped<IUserServices, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var app = builder.Build();
@@ -32,5 +30,11 @@ app.UseRouting();
 app.UseAuthorization();
 app.UseEndpoints(endpoint => endpoint.MapControllers());
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<DataContext>();
+    db.Database.Migrate();
+}
 
 app.Run();

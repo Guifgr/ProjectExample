@@ -14,63 +14,36 @@ public class UserRepository : IUserRepository
     {
         _context = context;
     }
-
-
     public async Task<List<User>> GetAllUsers()
     {
-        try
-        {
-            return await _context.Users.ToListAsync();
-        }
-        catch (Exception)
-        {
-            throw new ServerException("Erro ao acessar o banco");
-        }
+        return await _context.Users.AsNoTracking().ToListAsync();
     }
 
-    public async Task<User?> GetUserByGuid(Guid guid)
+    public async Task<User> GetUserByGuid(Guid guid)
     {
-        try
-        {
-            return await _context.Users.FirstOrDefaultAsync(u => u.Guid == guid);
-        }
-        catch (Exception)
-        {
-            throw new ServerException("Erro ao acessar o banco");
-        }
+        var user = await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Guid == guid);
+
+        if (user == default) throw new NotFoundException("Usuário não encontrado");
+        return user;
     }
 
     public async Task<bool> UserEmailExists(string email)
     {
-        try
-        {
-            return await _context.Users.AnyAsync(u => u.Email == email);
-        }
-        catch (Exception e)
-        {
-            throw new ServerException("Erro ao acessar o banco");
-        }
+        return await _context.Users.AsNoTracking().AnyAsync(u => u.Email == email);
     }
-
 
     public async Task<User> CreateUser(User user)
     {
-        try
-        {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-            return user;
-        }
-        catch (Exception e)
-        {
-            throw new ServerException("Erro no servidor ao tentar cadastrar");
-        }
+        _context.Users.Add(user);
+        await _context.SaveChangesAsync();
+        return user;
     }
 
     public async Task DeleteUser(Guid guid)
     {
         var user = await GetUserByGuid(guid);
-        if (user == null) throw new NotFoundException("Usu�rio n�o encontrado");
+        if (user == null) throw new NotFoundException("Usuário não encontrado");
         _context.Users.Remove(user);
+        await _context.SaveChangesAsync();
     }
 }

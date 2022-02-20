@@ -31,10 +31,10 @@ public class UsersControllers : ControllerBase
     public async Task<ActionResult<UserGetDto>> CreateUser(UserCreateDto userDto)
     {
         var userGetDto = await _userServices.CreateUser(userDto);
-        return CreatedAtRoute(nameof(GetUserByGuid), new {userGetDto.Guid}, userGetDto);
+        return CreatedAtRoute(nameof(GetUserByGuid), new { userGetDto.Guid }, userGetDto);
     }
 
-    [HttpGet("{guid:guid}")]
+    [HttpDelete("{guid:guid}")]
     public async Task<ActionResult> DeleteUser(Guid guid)
     {
         await _userServices.DeleteUser(guid);

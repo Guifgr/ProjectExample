@@ -22,7 +22,7 @@ public class UserService : IUserServices
     {
         var userList = await _userRepository.GetAllUsers();
 
-        if (!userList.Any())
+        if (userList.Count == 0)
         {
             //Caso a lista não tenha nenhum retorne erro de No content https://http.cat/204    
             throw new NoContentException("Nenhum usuário encontrado");
@@ -58,14 +58,13 @@ public class UserService : IUserServices
         {
             throw new BadRequestException("Email Já cadastrado em nossa base");
         }
-        
         var user = _mapper.Map<User>(userDto);
         var userGetDto = await _userRepository.CreateUser(user);
         return _mapper.Map<UserGetDto>(userGetDto);
     }
 
-    public Task DeleteUser(Guid guid)
+    public async Task DeleteUser(Guid guid)
     {
-        _userRepository.
+        await _userRepository.DeleteUser(guid);
     }
 }
